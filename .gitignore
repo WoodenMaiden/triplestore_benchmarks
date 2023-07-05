@@ -1,0 +1,9 @@
+# Ignore datasets files as they might exceed the 100M limit
+*.n3
+*.ttl
+*.rdf
+*.owl
+*.nt
+*.nq
+*.json*
+*.xml
