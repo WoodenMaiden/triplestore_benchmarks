@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns       ="http://rdf.muninn-project.org/ontologies/mugshots#"
+    xmlns:mugshots="http://rdf.muninn-project.org/ontologies/mugshots#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xml:base="http://rdf.muninn-project.org/ontologies/mugshots">
+
+  <owl:Ontology rdf:about="">
+   <dc:title>The Muninn Mugshots Facial Recognition Ontology</dc:title> 
+   <dc:description>The Muninn Mugshot Ontology is an experiment to markup facial recognition models in a manner that is portable and referenceable across research projects.</dc:description>
+   <rdfs:label xml:lang="en">The Muninn Mugshots Facial Recognition Ontology</rdfs:label>
+   <rdfs:comment xml:lang="en">The Muninn Mugshot Ontology is an experiment to markup facial recognition models in a manner that is portable and referenceable across research projects.</rdfs:comment>
+   <dc:creator rdf:resource="http://rdf.muninn-project.org/ww1/2011/11/11/Person/Warren"/>
+   <owl:versionInfo rdf:datatype="xsd:decimal">0.01</owl:versionInfo>
+  </owl:Ontology>
+
+  <owl:Class rdf:ID="Mugshot">
+   <rdfs:label xml:lang="en">Mugshot</rdfs:label>
+   <rdfs:comment xml:lang="en">A mugshot is a generic representation of a person appearance.</rdfs:comment>
+   <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/spec/Document" />
+  </owl:Class>
+
+
+  <owl:Class rdf:ID="ProofImage">
+   <rdfs:label xml:lang="en">ProofImage</rdfs:label>
+   <rdfs:comment xml:lang="en">An image with the relevant features shown.</rdfs:comment>
+   <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/spec/Document" />
+  </owl:Class>
+
+  <owl:Class rdf:ID="Profile">
+   <rdfs:label xml:lang="en">Mugshot (Profile)</rdfs:label>
+   <rdfs:comment xml:lang="en"></rdfs:comment>
+   <rdfs:subClassOf rdf:resource="#Mugshot" />
+   <owl:disjointWith rdf:resource="#Frontal_Mugshot"/>
+  </owl:Class>
+
+  <owl:Class rdf:ID="Face">
+   <rdfs:label xml:lang="en">Mugshot (Front)</rdfs:label>
+   <rdfs:comment xml:lang="en"></rdfs:comment>
+   <rdfs:subClassOf rdf:resource="#Mugshot" />
+  </owl:Class>
+
+  <owl:ObjectProperty rdf:ID="depiction">
+   <rdfs:label xml:lang="en">Proof Image</rdfs:label>
+   <rdfs:comment xml:lang="en">A proof is a image of the person in whatever view the model is meant to represent.</rdfs:comment>
+   <rdfs:domain rdf:resource="#Mugshot"/>
+   <rdfs:range rdf:resource="http://xmlns.com/foaf/spec/Image"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="source">
+   <rdfs:label xml:lang="en">Source Image</rdfs:label>
+   <rdfs:comment xml:lang="en">The image(s) this mugshot was derived from.</rdfs:comment>
+   <rdfs:domain rdf:resource="#Mugshot"/>
+   <rdfs:range rdf:resource="http://xmlns.com/foaf/spec/Image"/>
+  </owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:ID="source_left_x">
+ <rdfs:label xml:lang="en">Left X Coordinate</rdfs:label>  
+ <rdfs:comment xml:lang="en">Provides the left most x coordinate in the source picture where the mugshot was extracted from.</rdfs:comment>
+ <rdfs:domain rdf:resource="#Mugshot"/>
+ <rdfs:range rdf:resource="xsd:int" />
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="source_right_x">
+ <rdfs:label xml:lang="en">Right X Coordinate</rdfs:label>  
+ <rdfs:comment xml:lang="en">Provides the right most x coordinate in the source picture where the mugshot was extracted from.</rdfs:comment>
+ <rdfs:domain rdf:resource="#Mugshot"/>
+ <rdfs:range rdf:resource="xsd:int"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="source_top_y">
+ <rdfs:label xml:lang="en">Top Y Coordinate</rdfs:label>  
+ <rdfs:comment xml:lang="en">Provides the top most (count starting from north) y coordinate in the source picture where the mugshot was extracted from.</rdfs:comment>
+ <rdfs:domain rdf:resource="#Mugshot"/>
+ <rdfs:range rdf:resource="xsd:int"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="source_bottom_y">
+ <rdfs:label xml:lang="en">Bottom Y Coordinate</rdfs:label>  
+ <rdfs:comment xml:lang="en">Provides the bottom most (count starting from north) y coordinate in the source picture where the mugshot was extracted from.</rdfs:comment>
+ <rdfs:domain rdf:resource="#Mugshot"/>
+ <rdfs:range rdf:resource="xsd:int"/>
+</owl:DatatypeProperty>
+
+  <owl:ObjectProperty rdf:ID="identity">
+   <rdfs:label xml:lang="en">Indentity</rdfs:label>
+   <rdfs:comment xml:lang="en">Links the mugshot to an identity instance.</rdfs:comment>
+   <rdfs:domain rdf:resource="#Mugshot"/>
+   <rdfs:range rdf:resource="owl:Thing"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="recognition_model">
+   <rdfs:label xml:lang="en">Recognition Model</rdfs:label>
+   <rdfs:comment xml:lang="en">Generic pointer to a recognition model used to locate this mugshot.</rdfs:comment>
+   <rdfs:domain rdf:resource="#Mugshot"/>
+   <rdfs:range rdf:resource="owl:Thing"/>
+  </owl:ObjectProperty>
+</rdf:RDF>
+

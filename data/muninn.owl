@@ -1,0 +1,140 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<rdf:RDF
+    xmlns       ="http://rdf.muninn-project.org/ontologies/muninn#"
+    xmlns:muninn="http://rdf.muninn-project.org/ontologies/muninn#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1#"
+    xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xml:base="http://rdf.muninn-project.org/ontologies/muninn"
+    xmlns:cc="http://creativecommons.org/ns#">
+
+  <owl:Ontology rdf:about="">
+   <dc:title>The Muninn Top Level Ontology</dc:title> 
+   <dc:description>This Ontology contains high-level constructs used by the Muninn Project to describe some of its data. This ontology should not be considered to be portable.</dc:description>
+   <dc:creator rdf:resource="http://rdf.muninn-project.org/ww1/2011/11/11/Person/Warren"/>
+   <rdfs:label xml:lang="en">The Muninn Top Level Ontology</rdfs:label>
+   <rdfs:comment xml:lang="en">This Ontology contains high-level constructs used by the Muninn Project to describe some of its data. This ontology should not be considered to be portable.</rdfs:comment>
+   <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.1</owl:versionInfo>
+   <cc:license rdf:resource="http://creativecommons.org/licenses/by/3.0/"/>
+   <cc:attributionName>The Muninn Project</cc:attributionName>
+   <cc:attributionURL rdf:resource="http://www.muninn-project.org/"/>
+  </owl:Ontology>
+
+  <foaf:Person rdf:about="http://rdf.muninn-project.org/ww1/2011/11/11/Person/Warren">
+   <foaf:title>Doctor</foaf:title>
+   <foaf:familyName>Warren</foaf:familyName>
+   <foaf:givenName>Robert</foaf:givenName>
+   <foaf:firstName>Robert</foaf:firstName>
+   <foaf:lastName>Warren</foaf:lastName> 
+   <foaf:plan>One crisis at a time.</foaf:plan>
+   <foaf:depiction rdf:resource="http://www.dbdump.org/news/images/rob.jpg" />
+   <foaf:mbox_sha1sum>be6944ea14a8ce5f0ce0ee915ee428b0ea0fe1c1</foaf:mbox_sha1sum>
+  </foaf:Person>
+
+  <foaf:Person rdf:about="http://rdf.muninn-project.org/ww1/2011/11/11/Person/Hulan">
+   <foaf:title>Associate Professor</foaf:title>
+   <foaf:familyName>Hulan</foaf:familyName>
+   <foaf:givenName>Shelley</foaf:givenName>
+   <foaf:firstName>Shelley</foaf:firstName>
+   <foaf:lastName>Hulan</foaf:lastName> 
+   <foaf:workplaceHomepage rdf:resource="http://english.uwaterloo.ca/Hulan.html"/>
+   <foaf:depiction rdf:resource="http://english.uwaterloo.ca/images/hulanpic_004.jpg" />
+   <foaf:mbox_sha1sum>77f365d36ca90d90961a60be4b22ff1eb8465eb1</foaf:mbox_sha1sum>
+  </foaf:Person>
+  <foaf:Organization rdf:about="http://rdf.muninn-project.org/ww1/2011/11/11/Organization/Muninn">
+   <foaf:name>Muninn Project</foaf:name>
+   <foaf:mbox rdf:resource="mailto:rdf@muninn-project.org"/>
+   <foaf:weblog rdf:resource="http://www.muninn-project.org/"/>
+   <foaf:member rdf:resource="http://rdf.muninn-project.org/ww1/2011/11/11/Person/Warren" />
+   <foaf:member rdf:resource="http://rdf.muninn-project.org/ww1/2011/11/11/Person/Hulan" />
+  </foaf:Organization>
+
+<owl:ObjectProperty rdf:ID="common_knowledge_falsehood">
+ <rdfs:label xml:lang="en">Common Knowledge Falsehood</rdfs:label>
+ <rdfs:comment xml:lang="en">Use this to markup information that is widely and generally accepted as true in layman's terms while being false. Reasoners should ignore anything attached to this triple while search engines should.</rdfs:comment> 
+ <rdfs:range rdf:resource="#owl:Thing" />
+ <rdfs:domain rdf:resource="#owl:Thing" />
+</owl:ObjectProperty>
+
+
+<owl:ObjectProperty rdf:ID="trueAsOf">
+ <rdfs:label xml:lang="en">Statement true asOf</rdfs:label>
+ <rdfs:comment xml:lang="en">The truth of this statement depends on another source not under local control (used mainly with sameAs). Based on the state of the triples on the remote database at this time the statement was true.</rdfs:comment> 
+ <rdfs:range rdf:resource="http://www.w3.org/TR/owl-time#TemporalEntity"/>
+ <rdfs:domain rdf:resource="#owl:Thing"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="thanks">
+ <rdfs:label xml:lang="en">Thank you</rdfs:label>
+ <rdfs:comment xml:lang="en">This work was made possible by this person.</rdfs:comment> 
+</owl:ObjectProperty>
+
+<rdf:Description rdf:about="#acronym">
+    <rdfs:label xml:lang="en">acronym</rdfs:label>
+    <skos:definition xml:lang="en">An acronym, subproperty of skos:altLabel.</skos:definition>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2004/02/skos/core#altLabel"/>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+ </rdf:Description>
+
+
+<owl:ObjectProperty rdf:ID="translatedBy">
+ <rdfs:label xml:lang="en">translated By</rdfs:label>
+ <rdfs:comment xml:lang="en">This work was translated by this Person.</rdfs:comment> 
+</owl:ObjectProperty>
+
+
+<owl:Class rdf:ID="Experiment">
+ <rdfs:label xml:lang="en">An experiment</rdfs:label>  
+</owl:Class>
+<owl:Class rdf:ID="Job">
+ <rdfs:label xml:lang="en">A job on a machine.</rdfs:label>               
+</owl:Class>
+spooledwhen
+<owl:DatatypeProperty rdf:ID="jobID">
+ <rdfs:label xml:lang="en">A ID string for a job.</rdfs:label>               
+ <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="urlRetreivedFrom">
+ <rdfs:label xml:lang="en">The URL where the ressource was originally retreived from.</rdfs:label>
+ <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+</owl:DatatypeProperty>
+<owl:DatatypeProperty rdf:ID="muninn_queue">
+ <rdfs:label xml:lang="en">Job Queue to submit a job to.</rdfs:label> 
+ <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+<owl:DatatypeProperty rdf:ID="operation_password">
+ <rdfs:label xml:lang="en">Host password.</rdfs:label>
+ <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+<owl:DatatypeProperty rdf:ID="operation_username">
+ <rdfs:label xml:lang="en">Host username.</rdfs:label>
+ <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:AnnotationProperty rdf:ID="wikipedia_version">
+ <foaf:name>Wikipedia Page Version</foaf:name>
+ <rdfs:label xml:lang="en">Wikipedia Page Version</rdfs:label>
+ <rdfs:label xml:lang="fr">Version de la Page Wikipedia</rdfs:label>
+ <rdfs:label xml:lang="de">Wikipedia vorherigen Version</rdfs:label>
+ <rdfs:comment xml:lang="en">When linking to specific dbpedia instances, this annotation property records the version of the corresponding Wikipedia page that was reviewed by a human being.</rdfs:comment> 
+ <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:AnnotationProperty>
+
+<owl:AnnotationProperty rdf:ID="wikipedia_date">
+ <foaf:name>Wikipedia Page Date</foaf:name>
+ <rdfs:label xml:lang="en">Wikipedia Page Date</rdfs:label>
+ <rdfs:label xml:lang="fr">Date de la Page Wikipedia</rdfs:label>
+ <rdfs:label xml:lang="de">Wikipedia vorherigen Datum</rdfs:label>
+ <rdfs:comment xml:lang="en">When linking to specific dbpedia instances, this annotation property records the date of the corresponding Wikipedia page version that was reviewed by a human being.</rdfs:comment> 
+ <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+</owl:AnnotationProperty>
+
+</rdf:RDF>

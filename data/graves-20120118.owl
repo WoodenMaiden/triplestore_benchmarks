@@ -1,0 +1,438 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<rdf:RDF
+    xmlns       ="http://rdf.muninn-project.org/ontologies/graves#"
+    xmlns:graves="http://rdf.muninn-project.org/ontologies/graves#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xml:base="http://rdf.muninn-project.org/ontologies/graves">
+
+  <owl:Ontology rdf:about="">
+   <dc:title>The Muninn Graves Ontology</dc:title> 
+   <dc:description>The Muninn Graves Ontology is meants to deal with the remainsl of human beings.</dc:description>
+   <rdfs:label xml:lang="en">The Muninn Graves Ontology</rdfs:label>
+   <rdfs:comment xml:lang="en">The Muninn Graves Ontology is meants to deal with the remains of human beings.</rdfs:comment>
+   <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.1</owl:versionInfo>
+   <owl:imports rdf:resource="http://rdf.muninn-project.org/ontologies/muninn_locations.owl"/>
+  </owl:Ontology>
+
+  <owl:Class rdf:ID="Dead_people_place" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Dead people</rdfs:label>
+   <rdfs:label xml:lang="fr">Gens mort</rdfs:label>
+   <rdfs:label xml:lang="de">Menschen starben</rdfs:label>
+   <rdfs:comment xml:lang="en">A physical and administrative place with dead people in it. Of the non-zombie kind.</rdfs:comment>
+  </owl:Class>
+
+
+  <owl:Class rdf:ID="Crypt"> 
+   <rdfs:label xml:lang="en">Crypt</rdfs:label>
+   <rdfs:label xml:lang="fr">Crypte</rdfs:label>
+   <rdfs:label xml:lang="de">Krypta</rdfs:label>
+   <owl:subClassOf rdf:resource="#Monument" />
+<!--   <owl:sameAs>http://dbpedia.org/resource/Crypt</owl:sameAs> -->
+  </owl:Class>
+
+
+  <owl:Class rdf:ID="Statue"> 
+   <rdfs:label xml:lang="en">Statue</rdfs:label>
+   <rdfs:label xml:lang="de">Statue</rdfs:label>
+   <rdfs:label xml:lang="fr">Statue</rdfs:label>
+   <owl:subClassOf rdf:resource="#Monument" />
+<!--   <owl:sameAs>http://dbpedia.org/resource/Statue</owl:sameAs> -->
+  </owl:Class>
+
+  <owl:Class rdf:ID="Burial_mound">
+   <rdfs:label xml:lang="en">Burial_mound</rdfs:label>     
+   <owl:sameAs>#Tumulus</owl:sameAs> 
+  </owl:Class>
+
+  <owl:Class rdf:ID="Tumulus"> 
+   <rdfs:comment xml:lang="en">Tumulus is actually the Latin word, but unclear what the appropriate English label is here.</rdfs:comment>
+   <rdfs:label xml:lang="fr">Tumulus</rdfs:label>   
+   <rdfs:label xml:lang="de">Hügelgrab</rdfs:label>
+   <rdfs:label xml:lang="en">Tumulus</rdfs:label>   
+   <owl:subClassOf rdf:resource="#Monument" />
+<!--  <owl:sameAs>http://dbpedia.org/resource/Tumulus</owl:sameAs> -->
+  </owl:Class>
+
+  <owl:Class rdf:ID="Shrine"> 
+   <rdfs:label xml:lang="en">Shrine</rdfs:label>
+   <rdfs:label xml:lang="fr">Sanctuaire</rdfs:label>
+   <rdfs:label xml:lang="de">Schrein</rdfs:label>
+   <owl:subClassOf rdf:resource="#Monument" />
+<!--  <owl:sameAs>http://dbpedia.org/resource/Shrine</owl:sameAs> --> 
+  </owl:Class>
+ 
+  <owl:Class rdf:ID="Monument" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Monument</rdfs:label> 
+   <rdfs:comment xml:lang="en">A physical feature commemorating something or someone.</rdfs:comment>
+   <rdfs:label xml:lang="fr">Monument</rdfs:label>
+   <rdfs:label xml:lang="de">Monument</rdfs:label>
+<!--   <owl:sameAs>http://dbpedia.org/resource/Monument</owl:sameAs> -->
+  </owl:Class>
+
+  <owl:Class rdf:ID="Cenotaph" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Cenotaph</rdfs:label> 
+   <rdfs:label xml:lang="fr">Cénotaphe</rdfs:label>
+   <rdfs:label xml:lang="de">Kenotaph</rdfs:label>
+   <owl:subClassOf rdf:resource="#Monument" />
+   <owl:disjointWith rdf:resource="#Tombstone"/>
+<!--   <owl:sameAs>http://dbpedia.org/resource/Cenotaph</owl:sameAs> -->
+  </owl:Class>
+
+  <owl:Class rdf:ID="Sarcophagus" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Sarcophagus</rdfs:label> 
+   <rdfs:label xml:lang="fr">Sarcophage</rdfs:label>
+   <rdfs:label xml:lang="de">Sarkophag</rdfs:label>
+   <owl:subClassOf rdf:resource="#Monument" />
+<!--   <owl:sameAs>http://dbpedia.org/resource/Sarcophagus</owl:sameAs> -->
+  </owl:Class>
+
+
+  <owl:Class rdf:ID="Plaque" vs:term_status="testing">
+   <owl:subClassOf rdf:resource="#Monument" />
+   <rdfs:label xml:lang="en">Commemorative plaque</rdfs:label> 
+   <rdfs:label xml:lang="fr">Plaque commémorative</rdfs:label>
+   <rdfs:label xml:lang="de">Gedenktafel</rdfs:label>
+   <rdfs:comment xml:lang="en">A plaque commemorating a deceased person.</rdfs:comment>
+<!--   <owl:sameAs>http://dbpedia.org/resource/Commemorative_plaque</owl:sameAs> -->
+  </owl:Class>
+
+  <owl:Class rdf:ID="Tombstone" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Tombstone</rdfs:label> 
+   <rdfs:label xml:lang="fr">Pierre Tombale</rdfs:label>
+   <rdfs:label xml:lang="de">Grabstein</rdfs:label>
+<!--   <owl:sameAs>http://dbpedia.org/resource/Headstone</owl:sameAs> -->
+   <owl:subClassOf rdf:resource="#Monument" />
+  </owl:Class>
+
+  <owl:Class rdf:ID="Headstone" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Headstone</rdfs:label> 
+   <rdfs:label xml:lang="fr">Pierre Tombale</rdfs:label>
+   <rdfs:label xml:lang="de">Grabstein</rdfs:label>
+   <rdfs:comment xml:lang="en">Convinience class - redirects to #tombstone.</rdfs:comment>
+   <owl:sameAs rdf:resource="#Tombstone" />
+  </owl:Class>
+
+  <owl:Class rdf:ID="Gravestone" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Gravestone</rdfs:label> 
+   <rdfs:label xml:lang="fr">Pierre Tombale</rdfs:label>
+   <rdfs:label xml:lang="de">Grabstein</rdfs:label>
+   <rdfs:comment xml:lang="en">Convinience class - redirects to #tombstone.</rdfs:comment>
+   <owl:sameAs rdf:resource="#Tombstone" />
+  </owl:Class>
+
+  <owl:Class rdf:ID="Dig_site" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Archaeological dig site</rdfs:label>
+   <rdfs:label xml:lang="fr">Site de fouilles archéologiques</rdfs:label>
+   <rdfs:label xml:lang="de">Archäologische Ausgrabungsstätte</rdfs:label>
+   <rdfs:comment xml:lang="en">A physical location under the administration of an Archaeological organization where graves are being exhumed.</rdfs:comment> 
+   <rdfs:comment xml:lang="fr">Un site archéologiques sous le controle d'un groupe de recherche où des fouilles prennent place.</rdfs:comment>
+   <rdfs:comment xml:lang="de">Eine archäologische Ausgrabungsstätte unter der Kontrolle von einer Arbeitsgruppe, wo Ausgrabungen stattfinden.</rdfs:comment>
+   <owl:subClassOf rdf:resource="#Dead_people_place"/>
+  </owl:Class>
+
+  <owl:Class rdf:ID="Cemetery" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Cemetery</rdfs:label>
+   <rdfs:label xml:lang="fr">Cimetière</rdfs:label>
+   <rdfs:label xml:lang="de">Friedhof</rdfs:label>
+   <rdfs:comment xml:lang="en">A collection of graves in a single administrative unit. Distinct from a mass-grave.</rdfs:comment> 
+   <rdfs:comment xml:lang="fr">Une collection de tombes dans une unitée administrative (et non pas un charnier).</rdfs:comment>
+   <rdfs:comment xml:lang="de">Eine Sammlung von Gräbern in einer administrativen Einheit (keine Masse).</rdfs:comment>
+   <owl:sameAs>http://dbpedia.org/resource/Cemetery</owl:sameAs>
+   <owl:disjointWith rdf:resource="#Mass_grave"/>
+   <owl:subClassOf rdf:resource="#Dead_people_place"/>
+  </owl:Class>
+
+  <owl:DatatypeProperty rdf:ID="obfuscated" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Location obfuscated</rdfs:label>
+   <rdfs:comment xml:lang="en">The precision of the location informaton has been degraded but the data owner has the original information.</rdfs:comment>
+   <rdfs:domain rdf:resource="#Location"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:ID="site_name" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Cemetery Name</rdfs:label>
+   <rdfs:label xml:lang="fr">Nom du Cimetière</rdfs:label>
+   <rdfs:label xml:lang="de">Name des Friedhofs</rdfs:label>
+   <rdfs:comment xml:lang="en">The name of the cemetery.</rdfs:comment>
+   <rdfs:comment xml:lang="fr">Le nom du cimetière.</rdfs:comment>
+   <rdfs:comment xml:lang="de">Der Name des Friedhofs.</rdfs:comment>
+   <rdfs:domain rdf:resource="#Dead_people_place"/>
+   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+
+  <owl:DatatypeProperty rdf:ID="id" vs:term_status="testing">
+   <rdfs:label xml:lang="en">ID</rdfs:label>
+   <rdfs:comment xml:lang="en">Local ID number for non linked open data processing.</rdfs:comment>
+   <rdfs:domain rdf:resource="#Dead_people_place"/>
+   <rdfs:domain rdf:resource="#Remains"/>
+   <rdfs:domain rdf:resource="#Container_for_human_remains"/>
+   <rdfs:domain rdf:resource="#Monument"/>
+   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:ObjectProperty rdf:ID="moved_from" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Moved from</rdfs:label>
+   <rdfs:comment xml:lang="en">Use this to relate a grave or remains to its original instance elsewhere. Use this for disinterments.</rdfs:comment>
+   <rdfs:domain rdf:resource="#Dead_people_place"/>
+   <rdfs:domain rdf:resource="#Container_for_human_remains"/>
+   <rdfs:domain rdf:resource="#Remains"/>
+   <rdfs:domain rdf:resource="#Monument"/>
+   <!-- Needs location and time too --> 
+   <owl:inverseOf rdf:resource="#moved_to"/>
+  </owl:ObjectProperty>
+   
+   <!-- Order of precedence, next higher, next lower in terms of time.-->
+
+  <owl:ObjectProperty rdf:ID="moved_to" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Moved from</rdfs:label>
+   <rdfs:comment xml:lang="en">Use this to relate a grave or remains to its original instance elsewhere. Use this for disinterments.</rdfs:comment>
+   <rdfs:domain rdf:resource="#Dead_people_place"/>
+   <rdfs:domain rdf:resource="#Container_for_human_remains"/>
+   <rdfs:domain rdf:resource="#Remains"/> 
+   <rdfs:domain rdf:resource="#Monument"/>
+   <!-- Needs location and time too --> 
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="when_moved" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Moved on</rdfs:label>
+   <rdfs:label xml:lang="en">Date or interval when the objects were moved.</rdfs:label>
+   <rdfs:domain rdf:resource="#moved_from"/>
+   <rdfs:domain rdf:resource="#moved_to"/>
+   <rdfs:range rdf:resource="http://www.w3.org/TR/owl-time#TemporalEntity"/>
+  </owl:ObjectProperty>
+
+   <!-- http://en.wikipedia.org/wiki/Canadian_Tomb_of_the_Unknown_Soldier
+ The body of the soldier was formerly buried in Plot 8, Row E, Grave 7, of the Cabaret-Rouge British Cemetery in Souchez, France, near the memorial at Vimy Ridge, the site of the first major battle where Canadian troops fought as a combined force.
+-->
+
+  <owl:ObjectProperty rdf:ID="location" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Location</rdfs:label>
+   <rdfs:label xml:lang="fr">Emplacement</rdfs:label>
+   <rdfs:label xml:lang="de">Lage</rdfs:label>
+   <rdfs:comment xml:lang="en">Location in terms of longitude, latitude or geonames or street address.</rdfs:comment>
+   <rdfs:comment xml:lang="fr">Emplacement en terme de longitude, latitude ou attribut geonames ou addresse physique.</rdfs:comment>
+   <rdfs:comment xml:lang="de">Lage in Bezug auf Länge, Breite oder Attribut geonames oder physikalische Adresse.</rdfs:comment>
+   <rdfs:domain rdf:resource="#Dead_people_place"/>
+   <rdfs:domain rdf:resource="#Grave"/>
+   <rdfs:domain rdf:resource="#Monument"/>
+   <rdfs:range rdf:resource="http://rdf.muninn-project.org/ontologies/muninn_location#location"/>
+   <rdfs:range rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos"/>
+   <rdfs:range rdf:resource="http://www.geonames.org/ontology"/>
+   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:ObjectProperty>
+
+  <owl:Class rdf:ID="Remains" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Human remains</rdfs:label>
+   <rdfs:label xml:lang="fr">Restes Humains</rdfs:label>
+   <rdfs:label xml:lang="de">Die Überreste eines Menschen.</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:ID="Skeleton" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Skeleton.</rdfs:label>
+   <rdfs:label xml:lang="fr">Un squelette complet.</rdfs:label>
+   <rdfs:label xml:lang="de">Ein Skelett complet.</rdfs:label>
+   <rdfs:comment xml:lang="en">This property is meant to record that all of the larger bones of the skeleton were present. A body part seperatly buried or a skeleton missing a cranium would not be an instance of this property.</rdfs:comment>
+   <rdfs:comment xml:lang="fr">Cette propriété rapporte le fait que la dépouille comprend tout les gros os du squelette humain, même si quelques petit os manque. Les os d'un membre du corps humain ou un squelette sans crane ne serait pas classes dans cette propriété.</rdfs:comment>
+   <rdfs:comment xml:lang="de">Diese Eigenschaft bezieht sich auf die Tatsache, dass der Körper all der großen Knochen des menschlichen Skeletts enthält, obwohl einige kleine Knochen fehlt. Die Knochen eines Mitglieds des menschlichen Körpers, ohne ein Skelett oder Schädel-Klassen nicht in dieser Eigenschaft werden.</rdfs:comment>
+   <owl:subClassOf rdf:resource="#Remains" />
+   <owl:disjointWith rdf:resource="#Partial_remains"/>
+  </owl:Class>
+
+  <owl:Class rdf:ID="Ashes" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Human Ashes</rdfs:label>
+   <rdfs:label xml:lang="fr">Les cendres dispersées d'un corps humain. Les cendres peuvent être partielle or complète.</rdfs:label>
+   <rdfs:label xml:lang="de">Streute die Asche eines menschlichen Körpers. Die Asche kann teilweise oder vollständig.</rdfs:label>
+   <rdfs:subClass rdf:resource="#Remains" />
+  </owl:Class>
+
+  <owl:Class rdf:ID="Partial_remains" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Partial remains</rdfs:label>
+   <rdfs:label xml:lang="fr">Morceau de squelette</rdfs:label>
+   <rdfs:label xml:lang="de">Teilweise bleibt</rdfs:label>
+   <rdfs:comment xml:lang="en">Set to True, False or nil (explicit don't know).</rdfs:comment>
+   <rdfs:comment xml:lang="fr">Peut-être True (vrai), False (Faux) or nil (Declaré inconnue).</rdfs:comment>
+   <rdfs:comment xml:lang="de">Vielleicht True (Wahr), False (Falsch) oder null (erklärt unbekannt).</rdfs:comment>
+   <rdfs:subClass rdf:resource="#Remains"/>
+  </owl:Class>
+
+  <owl:Class rdf:ID="Grave" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Grave</rdfs:label>
+   <rdfs:label xml:lang="fr">Tombe</rdfs:label>
+   <rdfs:label xml:lang="de">Grab</rdfs:label>
+   <rdfs:comment xml:lang="en">A single or mass grave with the remains of human beings.</rdfs:comment> 
+   <rdfs:comment xml:lang="fr">Une tombe d'une ou de plusieurs personne.</rdfs:comment>
+   <rdfs:comment xml:lang="de">Ein Grab aus einer oder mehreren Personen.</rdfs:comment>
+   <owl:sameAs>http://dbpedia.org/resource/Grave</owl:sameAs>
+   <owl:subClassOf rdf:resource="#Container_for_human_remains"/>
+  </owl:Class>
+ 
+  <owl:Class rdf:ID="Container_for_human_remains" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Container of human remains</rdfs:label>
+   <rdfs:label xml:lang="de">Container von menschlichen Überresten</rdfs:label>
+   <rdfs:label xml:lang="fr">Un contenant pour des restes humains.</rdfs:label>
+   <rdfs:comment xml:lang="en">A generic class to unify all containers of human remains.</rdfs:comment>
+   <rdfs:comment xml:lang="de">Eine generische Klasse für alle Container von menschlichen Überresten zu vereinheitlichen.</rdfs:comment>
+   <rdfs:comment xml:lang="fr">Une classe générique pour tout les restes humains.</rdfs:comment>   
+  </owl:Class>
+
+  
+  
+  <owl:DatatypeProperty rdf:ID="epitaph" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Epitaph</rdfs:label>
+   <rdfs:label xml:lang="fr">Épitaphe</rdfs:label>
+   <rdfs:label xml:lang="de">Epitaph</rdfs:label>
+   <rdfs:comment xml:lang="en">The short text honoring the deceased person or persons.</rdfs:comment> 
+   <rdfs:comment xml:lang="fr">Une inscription funéraire, placée sur une pierre tombale, qui éloge les personne(s) dans la tombe.</rdfs:comment> 
+   <rdfs:comment xml:lang="de">Eine Grabinschrift, auf einem Grabstein gesetzt, der diese in das Grab gelobt.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Monument"/>
+    <owl:sameAs>http://dbpedia.org/resource/Epitaph</owl:sameAs> 
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:ID="monument_title" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Monument title</rdfs:label>
+   <rdfs:label xml:lang="fr">Titre du Monument</rdfs:label>
+   <rdfs:label xml:lang="de">Titel des Denkmals</rdfs:label>
+   <rdfs:comment xml:lang="en">The name of the monument; distinct from the inscription on it.</rdfs:comment> 
+   <rdfs:comment xml:lang="fr">Le nom du monument, à ne pas confondre avec le nom inscris sur le monument.</rdfs:comment> 
+   <rdfs:comment xml:lang="de">der Name des Denkmals, die nicht mit dem Namen auf dem Denkmal zu verwechseln beizutreten.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Monument"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:ID="monument_name" vs:term_status="testing">
+   <rdfs:label xml:lang="en">Monument person name</rdfs:label>
+   <rdfs:label xml:lang="fr">Nom de la personne</rdfs:label>
+   <rdfs:label xml:lang="de">Name der Person</rdfs:label>
+   <rdfs:comment xml:lang="en">The name of the person(s) being honored by the monument.</rdfs:comment> 
+   <rdfs:comment xml:lang="fr">Le nom de la personne/des personnes qui est/sont honoré par le monument.</rdfs:comment> 
+   <rdfs:comment xml:lang="de">der Name der Person / Personen ist / sind durch die Denkmal geehrt.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Monument"/>
+  </owl:DatatypeProperty>
+  
+  <owl:Class rdf:ID="Mass_grave" vs:term_status="unstable">
+   <rdfs:label xml:lang="en">Mass Grave</rdfs:label>
+   <rdfs:label xml:lang="fr">Charnier</rdfs:label>
+   <rdfs:label xml:lang="de">Beinhaus</rdfs:label>
+   <rdfs:comment xml:lang="en">True if the grave contains more than the remains of one person. This limit is arbitrary and needs debate.</rdfs:comment> 
+   <rdfs:comment xml:lang="fr">Vrai si la tombe contient plus d'un corps. Cette limite est arbitraire et doit être discuté.</rdfs:comment> 
+   <rdfs:comment xml:lang="de">True, wenn das Grab enthält mehr als ein Körper. Diese Grenze ist willkürlich und sollte diskutiert werden.</rdfs:comment>
+   <owl:sameAs>http://dbpedia.org/resource/Mass_grave</owl:sameAs>
+   <owl:subClassOf rdf:resource="#Container_for_human_remains"/>
+   <owl:subClassOf>
+   <owl:Restriction>
+    <owl:onProperty rdf:resource="#contains_remains" />
+    <owl:minCardinality rdf:datatype="xsd:nonNegativeInteger">2</owl:minCardinality>
+   </owl:Restriction>
+ </owl:subClassOf>
+  </owl:Class>
+
+  <owl:Class rdf:ID="Empty_grave" vs:term_status="unstable">
+   <rdfs:label xml:lang="en">Empty Grave</rdfs:label>
+   <rdfs:label xml:lang="fr">Tombe vide</rdfs:label>
+   <rdfs:label xml:lang="de">?</rdfs:label>
+   <rdfs:comment xml:lang="en">True if the grave contains no humain remains.</rdfs:comment> 
+   <rdfs:comment xml:lang="fr">Vrai si la tombe ne contient pas de depouille.</rdfs:comment> 
+   <owl:sameAs>http://dbpedia.org/resource/Mass_grave</owl:sameAs>
+   <owl:subClassOf rdf:resource="#Container_for_human_remains"/>
+   <owl:subClassOf>
+    <owl:Restriction>
+     <owl:onProperty rdf:resource="#contains_remains" />
+     <owl:maxCardinality rdf:datatype="xsd:integer">0</owl:maxCardinality>
+    </owl:Restriction> 
+   </owl:subClassOf>
+  </owl:Class>
+
+  <owl:ObjectProperty rdf:ID="contains_remains">
+    <rdfs:label xml:lang="en">Grave contains remains</rdfs:label>
+    <rdfs:label xml:lang="fr">Contient les restes</rdfs:label>
+    <rdfs:label xml:lang="de">enthält die Überreste</rdfs:label> 
+    <rdfs:domain rdf:resource="#Container_for_human_remains"/>
+    <rdfs:range rdf:resource="#Remains"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="remains_in">
+    <rdfs:label xml:lang="en">Remains are in Grave</rdfs:label>
+    <rdfs:label xml:lang="fr">Les restes dans la tombe</rdfs:label>
+    <rdfs:label xml:lang="de">bleibt, sind in Grab</rdfs:label> 
+    <rdfs:range rdf:resource="#Container_for_human_remains"/>
+    <rdfs:domain rdf:resource="#Remains"/>
+    <owl:inverseOf rdf:resource="#contains_remains"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="contains_grave">
+   <rdfs:label xml:lang="en">contains grave</rdfs:label>
+   <rdfs:label xml:lang="fr">Contient tombeau</rdfs:label>
+   <rdfs:label xml:lang="de">Grab enthielt in</rdfs:label>
+   <rdfs:domain rdf:resource="#Dead_people_place"/>
+   <rdfs:range rdf:resource="#Container_for_human_remains"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="grave_in">
+   <rdfs:label xml:lang="en">Grave contained by</rdfs:label>
+   <rdfs:label xml:lang="fr">Tombeau contenue par</rdfs:label>
+   <rdfs:label xml:lang="de">Tomb durch enthaltenen</rdfs:label>
+   <rdfs:range rdf:resource="#Dead_people_place"/>
+   <rdfs:domain rdf:resource="#Container_for_human_remains"/>
+   <owl:inverseOf rdf:resource="#contains_grave"/>
+  </owl:ObjectProperty>
+
+
+  <owl:ObjectProperty rdf:ID="remains_of">
+   <rdfs:label xml:lang="en">Remains of this Person</rdfs:label>
+   <rdfs:label xml:lang="fr">Les restes de cette personne</rdfs:label>
+   <rdfs:label xml:lang="de">Die Überreste dieser Person</rdfs:label>
+   <rdfs:comment xml:lang="en">A place holder for any information related to the identity of the remains.</rdfs:comment>
+   <rdfs:comment xml:lang="fr">Une reference a l'identité de la personne a qui la depouille appartient.</rdfs:comment>
+   <rdfs:comment xml:lang="de">Ein Verweis auf die Identität der Person, die den Körper gehört.</rdfs:comment>
+   <rdfs:domain rdf:resource="#Remains"/>
+   <rdfs:range rdf:resource="http://rdf.muninn-project.org/ontologies/muninn#person"/>
+   <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="has_remains">
+   <rdfs:label xml:lang="en">Person has remains</rdfs:label>
+   <rdfs:label xml:lang="fr">La personne a ces restes</rdfs:label>
+   <rdfs:label xml:lang="de">Person hat, bleibt</rdfs:label>
+   <rdfs:range rdf:resource="#Remains"/>
+   <rdfs:domain rdf:resource="http://rdf.muninn-project.org/ontologies/muninn#person"/>
+   <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+   <owl:inverseOf rdf:resource="#remains_of"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="commemorates">
+   <rdfs:label xml:lang="en">Commemorates</rdfs:label>
+   <rdfs:label xml:lang="fr">Commémore</rdfs:label>
+   <rdfs:label xml:lang="de">erinnert</rdfs:label>
+   <rdfs:comment xml:lang="en">Records any information as to the Person or Group being commemorated. Not suitable for Events.</rdfs:comment>
+   <rdfs:domain rdf:resource="#Monument"/>
+   <rdfs:range rdf:resource="http://rdf.muninn-project.org/ontologies/muninn#person"/>
+   <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+   <rdfs:range rdf:resource="#Container_for_human_remains"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="commemorated_by">
+   <rdfs:label xml:lang="en">Commemorated by</rdfs:label>
+   <rdfs:label xml:lang="fr">Commémoré par</rdfs:label>
+   <rdfs:label xml:lang="de">erinnert</rdfs:label>
+   <rdfs:comment xml:lang="en">Records any information as to the Person or Group being commemorated. Not suitable for Events.</rdfs:comment>
+   <rdfs:range rdf:resource="#Monument"/>
+   <rdfs:domain rdf:resource="http://rdf.muninn-project.org/ontologies/muninn#person"/>
+   <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+   <rdfs:domain rdf:resource="#Container_for_human_remains"/>
+   <owl:inverseOf rdf:resource="#commemorates"/>
+  </owl:ObjectProperty>
+
+
+
+
+</rdf:RDF>
+

@@ -8,7 +8,7 @@ Tested databases are:
 - [GraphDB](https://graphdb.ontotext.com/)
 - [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/)
 
-The test are running with the [Muninn World War I](https://old.datahub.io/dataset/muninn-world-war-i) dataset.
+The test are running with the [Muninn World War I](https://old.datahub.io/dataset/muninn-world-war-i) dataset. It will be downloaded automatically by the script as it exceed the max size for git.
 
 # KPIs (Key Performance Indicators)
 
@@ -21,7 +21,8 @@ The test are running with the [Muninn World War I](https://old.datahub.io/datase
 # Requirements 
 - docker
 - docker compose
-- nodejs
+- nodejs >= 20
+- the [triples](https://old.datahub.io/dataset/muninn-world-war-i/resource/7810c18b-adce-4543-9aaa-57eb1c9caef3) downloaded in the `data` folder
 
 # Tests ran 
 

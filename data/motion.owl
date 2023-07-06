@@ -1,0 +1,117 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<rdf:RDF
+    xmlns       ="http://rdf.muninn-project.org/ontologies/motion#"
+    xmlns:person="http://rdf.muninn-project.org/ontologies/person#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:org="http://rdf.muninn-project.org/ontologies/organization#"
+    xmlns:mil="http://rdf.muninn-project.org/ontologies/military#"
+    xmlns:muninn="http://rdf.muninn-project.org/ontologies/muninn#"
+    xmlns:foaf="http://xmlns.com/foaf/spec/"
+    xmlns:dbpedia="http://dbpedia.org/resource/"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:time = "http://www.w3.org/2006/time#"
+    xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+    xmlns:cc = "http://creativecommons.org/ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:olo="http://purl.org/ontology/olo/core#"
+    xmlns:vann="http://purl.org/vocab/vann/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:motion="http://rdf.muninn-project.org/ontologies/motion"
+    xml:base="http://rdf.muninn-project.org/ontologies/motion">
+
+  <owl:Ontology rdf:about="">
+   <foaf:name>motion</foaf:name>
+   <dc:title>The Muninn Motion Ontology</dc:title>
+   <dc:description></dc:description>
+   <rdfs:label xml:lang="en">The Muninn Motion Ontology</rdfs:label>
+   <rdfs:comment xml:lang="en"></rdfs:comment>
+   <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.01</owl:versionInfo>
+   <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">20131119</dc:date>
+   <dc:rights rdf:resource="http://creativecommons.org/licenses/by/3.0/"/> 
+   <vs:term_status>Testing</vs:term_status>
+   <dc:creator rdf:resource="http://rdf.muninn-project.org/ww1/2011/11/11/Person/Warren"/> 
+   <dc:publisher rdf:resource="http://rdf.muninn-project.org/ww1/2011/11/11/Organization/Muninn"/> 
+   <vann:preferredNamespacePrefix>gps</vann:preferredNamespacePrefix>
+ </owl:Ontology>
+
+
+ <owl:Class rdf:ID="Waypoint">
+  <foaf:name>Waypoint</foaf:name>
+  <rdfs:label xml:lang="en">Waypoint</rdfs:label>
+  <rdfs:comment xml:lang="en">A waypoint is a reference point in physical space.</rdfs:comment>
+  <owl:sameAs rdf:resource="http://dbpedia.org/resource/Waypoint"/>
+  <owl:subClassOf rdf:resource="http://www.w3.org/2006/time#TemporalEntity"/>
+  <owl:subClassOf rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#Point"/>
+ </owl:Class>
+
+ <owl:Class rdf:ID="Track">
+  <foaf:name>Track</foaf:name>
+  <rdfs:label xml:lang="en">Track</rdfs:label>
+  <rdfs:comment xml:lang="en">A Track is the path of an object.</rdfs:comment>
+  <owl:subClassOf rdf:resource="http://www.w3.org/2006/time#TemporalEntity"/>
+  <owl:subClassOf rdf:resource="http://purl.org/ontology/olo/core#OrderedList"/>
+ </owl:Class>
+
+<owl:ObjectProperty rdf:ID="startWaypoint">
+ <foaf:name>startWaypoint</foaf:name>
+ <rdfs:label xml:lang="en">startWaypoint</rdfs:label>
+ <rdfs:domain rdf:resource="Track"/>
+ <rdfs:range rdf:resource="Waypoint"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="endWaypoint">
+ <foaf:name>endWaypoint</foaf:name>
+ <rdfs:label xml:lang="en">endWaypoint</rdfs:label>
+ <rdfs:domain rdf:resource="Track"/>
+ <rdfs:range rdf:resource="Waypoint"/>
+</owl:ObjectProperty>
+
+ <owl:DatatypeProperty rdf:ID="hasSpeed">
+  <foaf:name>Speed</foaf:name>
+  <rdfs:label xml:lang="en">Has speed</rdfs:label>  
+  <rdfs:domain rdf:resource="Waypoint"/>
+  <owl:sameAs rdf:resource="http://dbpedia.org/resource/Speed"/>
+ </owl:DatatypeProperty>
+
+ <owl:DatatypeProperty rdf:ID="hasSpeedError">
+  <foaf:name>SpeedError</foaf:name>
+  <rdfs:label xml:lang="en">Has speed error</rdfs:label>  
+  <rdfs:domain rdf:resource="Waypoint"/>
+ <!-- http://purl.oclc.org/NET/ssnx/ssn#Accuracy -->
+ </owl:DatatypeProperty>
+
+ <owl:DatatypeProperty rdf:ID="hasHeading">
+  <foaf:name>Heading</foaf:name>
+  <rdfs:label xml:lang="en">Has heading</rdfs:label>  
+  <rdfs:comment xml:lang="en">In reference to true north.</rdfs:comment>
+  <rdfs:domain rdf:resource="Waypoint"/>
+ </owl:DatatypeProperty>
+
+ <owl:DatatypeProperty rdf:ID="hasHeadingError">
+  <foaf:name>Heading Error</foaf:name>
+  <rdfs:label xml:lang="en">Has heading error</rdfs:label>  
+  <rdfs:domain rdf:resource="Waypoint"/>
+ </owl:DatatypeProperty>
+
+ <owl:DatatypeProperty rdf:ID="hasClimbRate">
+  <foaf:name>Climb Rate</foaf:name>
+  <rdfs:label xml:lang="en">Has climb rate</rdfs:label>  
+  <rdfs:domain rdf:resource="Waypoint"/>
+  <owl:sameAs rdf:resource="http://dbpedia.org/resource/Rate_of_climb"/>
+ </owl:DatatypeProperty>
+
+ <owl:DatatypeProperty rdf:ID="hasClimbRateError">
+  <foaf:name>Climb Rate Error</foaf:name>
+  <rdfs:label xml:lang="en">Has climb rate error</rdfs:label>  
+  <rdfs:domain rdf:resource="Waypoint"/>
+  <owl:sameAs rdf:resource="http://dbpedia.org/resource/Rate_of_climb"/>
+ </owl:DatatypeProperty>
+
+
+
+</rdf:RDF>

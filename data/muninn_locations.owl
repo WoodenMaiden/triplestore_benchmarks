@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:muninn_loc="http://rdf.muninn-project.org/ontologies/locations.owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:p1="http://www.w3.org/2003/01/geo/wgs84_pos#"
+  xml:base="http://rdf.muninn-project.org/ontologies/locations">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos"/>
+    <owl:imports rdf:resource="http://www.geonames.org/ontology"/>
+  </owl:Ontology>
+  <owl:Class rdf:ID="Location"/>
+  <owl:ObjectProperty rdf:ID="name">
+    <rdfs:domain rdf:resource="#Location"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sub_location">
+    <rdfs:domain rdf:resource="#Location"/>
+  </owl:ObjectProperty>
+  <rdf:Property rdf:about="http://xmlns.com/foaf/0.1/based_near"/>
+  <owl:DatatypeProperty rdf:ID="long_lat"/>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.4.6, Build 613)  http://protege.stanford.edu -->

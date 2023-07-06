@@ -1,0 +1,1579 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:person="http://rdf.muninn-project.org/ontologies/person#" xmlns:rel="http://purl.org/vocab/relationship/" xmlns:muninnww1="http://rdf.muninn-project.org/ww1/2011/11/11/" xmlns:jp1="http://rdf.muninn-project.org/ontologies/jp1#" xmlns:btmaps="http://rdf.muninn-project.org/ontologies/btmaps#" xmlns="http://rdf.muninn-project.org/ontologies/btmaps#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:org="http://rdf.muninn-project.org/ontologies/organization#" xmlns:mil="http://rdf.muninn-project.org/ontologies/military#" xmlns:muninn="http://rdf.muninn-project.org/ontologies/muninn#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:religion="http://rdf.muninn-project.org/ontologies/religion#" xmlns:dbpedia="http://dbpedia.org/resource/" xmlns:graves="http://rdf.muninn-project.org/ontologies/graves#" xmlns:time="http://www.w3.org/2006/time#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#" xmlns:documents="http://rdf.muninn-project.org/ontologies/documents#" xmlns:swrl="http://www.w3.org/2003/11/swrl#" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:swrlb="http://www.w3.org/2003/11/swrlb#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:spatialrelations="http://data.ordnancesurvey.co.uk/ontology/spatialrelations/" xml:base="http://rdf.muninn-project.org/ontologies/btmaps">
+
+<owl:Ontology rdf:about="">
+ <dc:title>Muninn British Trench Maps Dictionary</dc:title>
+ <dc:description>This is a dictionary of all known British Trench Maps from the Great War.</dc:description>
+ <rdfs:label xml:lang="en">Muninn British Trench Maps Dictionary</rdfs:label>
+ <rdfs:comment xml:lang="en">This is a dictionary of all known British Trench Maps from the Great War.</rdfs:comment>
+ <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</owl:versionInfo>
+ <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">20130515</dc:date>
+ <dc:rights rdf:resource="http://creativecommons.org/licenses/by/3.0/"/> 
+ <vs:term_status>Testing</vs:term_status>
+ <dc:creator rdf:resource="http://rdf.muninn-project.org/ww1/2011/11/11/Person/Warren"/> 
+ <dc:publisher rdf:resource="http://rdf.muninn-project.org/ww1/2011/11/11/Organization/Muninn"/> 
+ <!-- Contributing -->
+ <muninn:thanks>
+  <foaf:Person rdf:about="pierrevoet">
+   <foaf:givenName>Pierre</foaf:givenName>
+   <foaf:familyName>Voet</foaf:familyName>
+   <foaf:name>Pierre Voet</foaf:name>
+   <rel:Employed_By rdf:resource="http://dbpedia.org/resource/National_Geographic_Institute_(Belgium)"/>
+  </foaf:Person>
+ </muninn:thanks>
+</owl:Ontology>
+
+<owl:Class rdf:ID="GridReference">
+ <foaf:name>Grid Reference</foaf:name>
+ <rdfs:label xml:lang="en">Grid Reference</rdfs:label>
+ <rdfs:comment xml:lang="en">A Grid Reference is a location within a MapSheet which at its largest scale equals the area of a Map Sheet.</rdfs:comment>
+</owl:Class>
+
+<owl:ObjectProperty rdf:ID="inMapSheet">
+ <foaf:name>In Map Sheet</foaf:name>
+ <rdfs:label xml:lang="en">In Map Sheet</rdfs:label>
+ <rdfs:range rdf:resource="#GridReference"/>
+ <rdfs:domain rdf:resource="#MapSheet"/> 
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="easting">
+ <foaf:name>Easting</foaf:name>
+ <rdfs:label xml:lang="en">Easting</rdfs:label>
+ <rdfs:range rdf:resource="#MapSheet"/>
+ <rdfs:comment xml:lang="en">The easting is the distance in meters from the false origin to the western side of the grid square.</rdfs:comment>
+ <owl:sameAs rdf:resource="http://data.ordnancesurvey.co.uk/ontology/spatialrelations/easting"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="northing">
+ <foaf:name>Northing</foaf:name>
+ <rdfs:label xml:lang="en">Northing</rdfs:label>
+ <rdfs:range rdf:resource="#MapSheet"/>
+ <rdfs:comment xml:lang="en">The northing is the distance in meters from the false origin to the south side of the grid square.</rdfs:comment>
+ <owl:sameAs rdf:resource="http://data.ordnancesurvey.co.uk/ontology/spatialrelations/northing"/>
+</owl:ObjectProperty>
+
+
+<owl:ObjectProperty rdf:ID="hasCentroid">
+ <foaf:name>Centroid</foaf:name>
+ <rdfs:label xml:lang="en"> Has Centroid</rdfs:label>
+ <rdfs:comment xml:lang="en">The longitude and latitude of the centroid of this reference - use for labeling.</rdfs:comment>
+ <rdfs:range rdf:resource="#GridReference"/>
+ <rdfs:range rdf:resource="#MapSheet"/>
+ <rdfs:domain rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#Point"/>
+ <owl:inverseOf rdf:resource="#centroidOf"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="centroidOf">
+ <foaf:name>Centroid Of</foaf:name>
+ <rdfs:label xml:lang="en">Centroid Of </rdfs:label>
+ <rdfs:comment xml:lang="en">The longitude and latitude is the centroid of this reference - use for labeling.</rdfs:comment>
+ <rdfs:domain rdf:resource="#GridReference"/>
+ <rdfs:domain rdf:resource="#MapSheet"/>
+ <rdfs:range rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#Point"/>
+</owl:ObjectProperty>
+
+<owl:AnnotationProperty rdf:ID="wasLocationOf">
+ <foaf:name>was Location Of</foaf:name>
+ <rdfs:label xml:lang="en">was Location Of</rdfs:label>
+ <rdfs:comment xml:lang="en">This grid was the location of an event or item.</rdfs:comment>
+ <rdfs:domain rdf:resource="#GridReference"/>
+ <rdfs:domain rdf:resource="#MapSheet"/>
+</owl:AnnotationProperty>
+
+<owl:AnnotationProperty rdf:ID="currentLocationOf">
+ <foaf:name>current Location Of</foaf:name>
+ <rdfs:label xml:lang="en">current Location Of</rdfs:label>
+ <rdfs:comment xml:lang="en">This grid currently is the location of an event or item.</rdfs:comment>
+ <rdfs:domain rdf:resource="#GridReference"/>
+ <rdfs:domain rdf:resource="#MapSheet"/>
+</owl:AnnotationProperty>
+
+
+<owl:ObjectProperty rdf:ID="hasGeometry">
+ <rdfs:label xml:lang="en">Has Geometry</rdfs:label>
+ <rdfs:comment xml:lang="en">Has Geometry</rdfs:comment>
+ <rdfs:range rdf:resource="#GridReference"/>
+ <rdfs:range rdf:resource="#MapSheet"/>
+ <rdfs:domain rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#Point"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="nextPoint">
+ <rdfs:label xml:lang="en">Next Point</rdfs:label>
+ <rdfs:comment xml:lang="en">Next point in a sequence of Points. Used for creating fast polygons.</rdfs:comment>
+ <rdfs:domain rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#Point"/>
+ <rdfs:range rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#Point"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="previousPoint">
+ <rdfs:label xml:lang="en">Previous Point</rdfs:label>
+ <rdfs:comment xml:lang="en">Previous point in a sequence of Points. Used for creating fast polygons.</rdfs:comment>
+ <rdfs:domain rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#Point"/>
+ <rdfs:range rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#Point"/>
+ <owl:inverseOf rdf:resource="#nextPoint"/>
+</owl:ObjectProperty>
+
+
+<owl:DatatypeProperty rdf:ID="sixThousandYardSquare">
+ <foaf:name>sixThousandYardSquare</foaf:name>
+ <rdfs:label xml:lang="en">sixThousandYardSquare</rdfs:label>
+ <rdfs:range rdf:resource="#GridReference"/> 
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="oneThousandYardSquare">
+ <foaf:name>oneThousandYardSquare</foaf:name>
+ <rdfs:label xml:lang="en">oneThousandYardSquare</rdfs:label>
+ <rdfs:range rdf:resource="#GridReference"/> 
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="fiveHundredYardSquare">
+ <foaf:name>fiveHundredYardSquare</foaf:name>
+ <rdfs:label xml:lang="en">fiveHundredYardsSquare</rdfs:label>
+ <rdfs:range rdf:resource="#GridReference"/> 
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="fiftyYardEasting">
+ <foaf:name>fiftyYardEasting</foaf:name>
+ <rdfs:label xml:lang="en">fiftyYardEasting</rdfs:label>
+ <rdfs:range rdf:resource="#GridReference"/> 
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="fiftyYardNorthing">
+ <foaf:name>fiftyYardNorthing</foaf:name>
+ <rdfs:label xml:lang="en">fiftyYardNorthing</rdfs:label>
+ <rdfs:range rdf:resource="#GridReference"/> 
+</owl:DatatypeProperty>
+
+<owl:Class rdf:ID="MapSheet">
+ <foaf:name>Map Sheet</foaf:name>
+ <rdfs:label xml:lang="en">Map Sheet</rdfs:label>
+ <rdfs:comment xml:lang="en">A specific sheet within the map grid.</rdfs:comment>
+</owl:Class>
+
+<owl:DatatypeProperty rdf:ID="mapSeries">
+ <foaf:name>Map Series</foaf:name>
+ <rdfs:comment xml:lang="en">The Series number of the perticular set of sheets that this specific map sheet is part of. (e.g.: GS2743)</rdfs:comment>
+ <rdfs:label xml:lang="en">Map Series</rdfs:label>
+ <rdfs:range rdf:resource="#MapSheet"/> 
+</owl:DatatypeProperty>
+
+<owl:ObjectProperty rdf:ID="mapRevisionDate">
+ <foaf:name>Map Revision Date</foaf:name>
+ <rdfs:comment xml:lang="en">The date on which this specific map sheet was revised - map sheets of the same series would have different overlays printed on them with updated trench positions.</rdfs:comment>
+ <rdfs:label xml:lang="en">Map Revision Date</rdfs:label>
+ <rdfs:range rdf:resource="#MapSheet"/> 
+</owl:ObjectProperty>
+
+<owl:Class rdf:ID="GridSquare">
+ <foaf:name>Grid Square</foaf:name>
+ <rdfs:label xml:lang="en">Grid Square</rdfs:label>
+</owl:Class>
+
+<owl:DatatypeProperty rdf:ID="northingLengthInYards">
+ <foaf:name>Northing Length</foaf:name>
+ <rdfs:label xml:lang="en">North-South length of the grid square (Yards)</rdfs:label>
+ <rdfs:range rdf:resource="#GridSquare"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="eastingLengthInYards">
+ <foaf:name>Easting Length</foaf:name>
+ <rdfs:label xml:lang="en">East-West length of the grid square (Yards)</rdfs:label>
+ <rdfs:range rdf:resource="#GridSquare"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="averageElevationInMeters">
+ <foaf:name>Average Elevation</foaf:name>
+ <rdfs:label xml:lang="en">Average Elevation (Meters)</rdfs:label>
+ <rdfs:range rdf:resource="#GridSquare"/>
+ <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#alt"/> 
+</owl:DatatypeProperty>
+
+<owl:ObjectProperty rdf:ID="isNorthOf">
+ <foaf:name>is North Of</foaf:name>
+ <rdfs:label xml:lang="en">is North Of</rdfs:label>
+ <owl:sameAs rdf:resource="http://sw.cyc.com/concept/Mx4rvVj7ApwpEbGdrcN5Y29ycA"/>
+ <owl:inverseOf rdf:resource="#isSouthOf"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="isSouthOf">
+ <foaf:name>is South Of</foaf:name>
+ <rdfs:label xml:lang="en">is South Of</rdfs:label>
+ <owl:sameAs rdf:resource="http://sw.cyc.com/concept/Mx4rvVjd4pwpEbGdrcN5Y29ycA"/>
+ <owl:inverseOf rdf:resource="#isNorthOf"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="isWestOf">
+ <foaf:name>is West Of</foaf:name>
+ <rdfs:label xml:lang="en">is West Of</rdfs:label>
+ <owl:sameAs rdf:resource="http://sw.cyc.com/concept/Mx4rvVjxZZwpEbGdrcN5Y29ycA"/>
+ <owl:inverseOf rdf:resource="#isEastOf"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="isEastOf">
+ <foaf:name>is East Of</foaf:name>
+ <rdfs:label xml:lang="en">is East Of</rdfs:label>
+ <owl:sameAs rdf:resource="http://sw.cyc.com/concept/Mx4rvVjxJJwpEbGdrcN5Y29ycA"/>
+<owl:inverseOf rdf:resource="#isWestOf"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:ID="heading">
+ <foaf:name>Heading</foaf:name>
+ <rdfs:label xml:lang="en">Heading in Degrees</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="headingMagnetic">
+ <foaf:name>Magnetic Heading</foaf:name>
+ <rdfs:label xml:lang="en">Magnetic Heading in Degrees</rdfs:label>
+ <rdfs:subPropertyOf rdf:resource="#heading"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="headingTrueNorth">
+ <foaf:name>True North Heading</foaf:name>
+ <rdfs:label xml:lang="en">True North Heading in Degrees</rdfs:label>
+ <rdfs:subPropertyOf rdf:resource="#heading"/>
+</owl:DatatypeProperty>
+
+
+<owl:ObjectProperty rdf:ID="contains">
+ <rdfs:label xml:lang="en">contains</rdfs:label>
+ <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+ <owl:sameAs rdf:resource="http://data.ordnancesurvey.co.uk/ontology/spatialrelations/contains"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="within">
+ <rdfs:label xml:lang="en">within</rdfs:label>
+ <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+ <owl:inverseOf rdf:resource="contains"/>
+ <owl:sameAs rdf:resource="http://data.ordnancesurvey.co.uk/ontology/spatialrelations/within"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="partiallyOverlaps">
+ <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+ <rdfs:label xml:lang="en">overlaps</rdfs:label>
+ <owl:sameAs rdf:resource="http://data.ordnancesurvey.co.uk/ontology/spatialrelations/partiallyOverlaps"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="touches">
+ <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+ <rdfs:label xml:lang="en">touches</rdfs:label>
+ <rdfs:comment xml:lang="en">The boundaries of the two objects intersect but their interiors do not.</rdfs:comment>
+ <owl:sameAs rdf:resource="http://data.ordnancesurvey.co.uk/ontology/spatialrelations/touches"/>
+</owl:ObjectProperty>
+
+
+
+ 
+<!--  
+
+-->
+
+<GridSquare rdf:about="#40000-19b">
+ <foaf:name>19b</foaf:name>
+ <rdfs:label xml:lang="en">19b</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">57240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-212000</btmaps:easting>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards>
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3019844/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967326/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2973376/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3036238/"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-27b">
+ <foaf:name>27b</foaf:name>
+ <rdfs:label xml:lang="en">27b</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">37240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-212000</btmaps:easting>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards>
+ <btmaps:isSouthOf rdf:resource="#40000-19b"/>
+ <btmaps:touches rdf:resource="#40000-19b"/>
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3037915/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967351/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3036233/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967350/"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-36e">
+ <foaf:name>36e</foaf:name>
+ <rdfs:label xml:lang="en">36e</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">17240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-212000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-27b"/>
+ <btmaps:touches rdf:resource="#40000-27b"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards>
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3021757/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2990678/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2990733/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3029012/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3023946/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3019957/"/>
+ <btmaps:averageElevationInMeters>79</btmaps:averageElevationInMeters>
+</GridSquare>
+<GridSquare rdf:about="#40000-44d">
+ <foaf:name>44d</foaf:name>
+ <rdfs:label xml:lang="en">44d</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-2760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-212000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-36e"/>
+ <btmaps:touches rdf:resource="#40000-36e"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards>
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2994349/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2984438/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3033415/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3038389/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3038388/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3033416/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2969613/"/>
+ <btmaps:averageElevationInMeters>7</btmaps:averageElevationInMeters>
+</GridSquare>
+<GridSquare rdf:about="#40000-51e">
+ <foaf:name>51e</foaf:name>
+ <rdfs:label xml:lang="en">51e</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-22760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-212000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-44d"/>
+ <btmaps:touches rdf:resource="#40000-44d"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3018878/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2977279/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3004398/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2982261/"/>
+ <btmaps:averageElevationInMeters>8</btmaps:averageElevationInMeters>
+</GridSquare>
+<GridSquare rdf:about="#40000-57f">
+ <foaf:name>57f</foaf:name>
+ <rdfs:label xml:lang="en">57f</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-42760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-212000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-51e"/>
+ <btmaps:touches rdf:resource="#40000-51e"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2970985/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3025482/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3018561/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3017331/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3038706/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2989764/"/>
+ <btmaps:averageElevationInMeters>94</btmaps:averageElevationInMeters>
+</GridSquare>
+<GridSquare rdf:about="#40000-62f">
+ <foaf:name>62f</foaf:name>
+ <rdfs:label xml:lang="en">62f</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-62760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-212000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-57f"/>
+ <btmaps:touches rdf:resource="#40000-57f"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2990728/"/>
+ <btmaps:averageElevationInMeters>114</btmaps:averageElevationInMeters>
+</GridSquare>
+<GridSquare rdf:about="#40000-66g">
+ <foaf:name>66g</foaf:name>
+ <rdfs:label xml:lang="en">66g</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-82760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-212000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-62f"/>
+ <btmaps:touches rdf:resource="#40000-62f"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:averageElevationInMeters>235</btmaps:averageElevationInMeters>
+</GridSquare>
+<GridSquare rdf:about="#40000-70h">
+ <foaf:name>70h</foaf:name>
+ <rdfs:label xml:lang="en">70h</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-102760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-212000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-66g"/>
+ <btmaps:touches rdf:resource="#40000-66g"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3028097/"/>
+ <btmaps:averageElevationInMeters>123</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-19a">
+ <foaf:name>19a</foaf:name>
+ <rdfs:label xml:lang="en">19a</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">57240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-180000</btmaps:easting>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-19"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2988893/"/>
+ <btmaps:averageElevationInMeters>3</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-27a">
+ <foaf:name>27a</foaf:name>
+ <rdfs:label xml:lang="en">27a</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">37240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-180000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-19a"/>
+ <btmaps:touches rdf:resource="#40000-19a"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-27"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2972235/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967118/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3031662/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2990124/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3024626/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2990086/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2994496/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2997469/"/>
+ <btmaps:averageElevationInMeters>36</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-36d">
+ <foaf:name>36d</foaf:name>
+ <rdfs:label xml:lang="en">36d</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">17240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-180000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-27a"/>
+ <btmaps:touches rdf:resource="#40000-27a"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-36a"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2972867/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967328/"/>
+ <btmaps:averageElevationInMeters>107</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-44c">
+ <foaf:name>44c</foaf:name>
+ <rdfs:label xml:lang="en">44c</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-2760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-180000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-36d"/>
+ <btmaps:touches rdf:resource="#40000-36d"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-36b"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3017121/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2986866/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2981940/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967484/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3008442/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3034403/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3035652/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2972443/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3036271/"/>
+ <btmaps:averageElevationInMeters>110</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-51d">
+ <foaf:name>51d</foaf:name>
+ <rdfs:label xml:lang="en">51d</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-22760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-180000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-44c"/>
+ <btmaps:touches rdf:resource="#40000-44c"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-51c"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3002599/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967839/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3016329/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2970454/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967362/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3028187/"/>
+ <btmaps:averageElevationInMeters>69</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-57e">
+ <foaf:name>57e</foaf:name>
+ <rdfs:label xml:lang="en">57e</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-42760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-180000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-51d"/>
+ <btmaps:touches rdf:resource="#40000-51d"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-57d"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2973685/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3029822/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3015659/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3017323/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3019923/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3017317/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2970569/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3021230/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3021114/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2991554/"/>
+ <btmaps:averageElevationInMeters>95</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-62e">
+ <foaf:name>62e</foaf:name>
+ <rdfs:label xml:lang="en">62e</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-62760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-180000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-57e"/>
+ <btmaps:touches rdf:resource="#40000-57e"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-62d"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3029989/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3028103/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2976523/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3017521/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2989644/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2983622/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2974708/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3031289/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3018199/"/>
+ <btmaps:averageElevationInMeters>120</btmaps:averageElevationInMeters>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Amiens_(1918)"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Hundred_Days_Offensive"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-66f">
+ <foaf:name>66f</foaf:name>
+ <rdfs:label xml:lang="en">66f</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-82760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-180000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-62e"/>
+ <btmaps:touches rdf:resource="#40000-62e"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-66e"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3023090/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3033656/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3023816/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3018289/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2972768/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3030507/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2970211/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3005887/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3023804/"/>
+ <btmaps:averageElevationInMeters>181</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-70g">
+ <foaf:name>70g</foaf:name>
+ <rdfs:label xml:lang="en">70g</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-102760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-180000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-66f"/>
+ <btmaps:touches rdf:resource="#40000-66f"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-70f"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2997215/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2987024/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3012002/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2991225/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3032240/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3036272/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2996607/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2982706/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2995106/"/>
+ <btmaps:averageElevationInMeters>162</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<!-- Next section -->
+
+
+<GridSquare rdf:about="#40000-11">
+ <foaf:name>11</foaf:name>
+ <rdfs:label xml:lang="en">11</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">77240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-148000</btmaps:easting>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-12"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3030473/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2799577/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967110/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3016130/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3004244/"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-19">
+ <foaf:name>19</foaf:name>
+ <rdfs:label xml:lang="en">19</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">57240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-148000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-11"/>
+ <btmaps:touches rdf:resource="#40000-11"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-20"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967460/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013044/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2971272/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2973049/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3033363/"/>
+ <btmaps:averageElevationInMeters>1</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-27">
+ <foaf:name>27</foaf:name>
+ <rdfs:label xml:lang="en">27</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">37240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-148000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-19"/>
+ <btmaps:touches rdf:resource="#40000-19"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-28"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3028440/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013937/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2980437/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2989060/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2973150/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967148/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3034505/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967400/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967109/"/>
+ <btmaps:averageElevationInMeters>60</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-36a">
+ <foaf:name>36a</foaf:name>
+ <rdfs:label xml:lang="en">36a</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">17240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-148000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-27"/>
+ <btmaps:touches rdf:resource="#40000-27"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-36"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3014450/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2976690/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013635/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3012725/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2972864/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3029473/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2973826/"/>
+ <btmaps:averageElevationInMeters>17</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-36b">
+ <foaf:name>36b</foaf:name>
+ <rdfs:label xml:lang="en">36b (44b)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-2760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-148000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-36a"/>
+ <btmaps:touches rdf:resource="#40000-36a"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-36c"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3032953/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013122/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2988959/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3021298/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3009940/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2984468/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3035291/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3029099/"/>
+ <btmaps:averageElevationInMeters>80</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-51c">
+ <foaf:name>51c</foaf:name>
+ <rdfs:label xml:lang="en">51c (West of Arras)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-22760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-148000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-36b"/>
+ <btmaps:touches rdf:resource="#40000-36b"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-51b"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3035702/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3034312/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2996204/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3034900/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3014987/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2989891/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2974319/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3015910/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3017656/"/>
+ <btmaps:averageElevationInMeters>131</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-57d">
+ <foaf:name>57d</foaf:name>
+ <rdfs:label xml:lang="en">57d (Hebuterne area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-42760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-148000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-51c"/>
+ <btmaps:touches rdf:resource="#40000-51c"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-57c"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2997349/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3038707/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3033168/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3005384/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2970570/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3024407/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3035950/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2978818/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3017790/"/>
+ <btmaps:averageElevationInMeters>137</btmaps:averageElevationInMeters>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Pozi%C3%A8res"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_the_Ancre"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Thiepval_Ridge"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-62d">
+ <foaf:name>62d</foaf:name>
+ <rdfs:label xml:lang="en">62d (M&#xE9;aulte area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-62760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-148000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-57d"/>
+ <btmaps:touches rdf:resource="#40000-57d"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-62c"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3014018/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2971158/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3023742/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2970311/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3031779/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3036339/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2981960/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013583/"/>
+ <btmaps:averageElevationInMeters>35</btmaps:averageElevationInMeters>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Second_Battle_of_Villers-Bretonneux"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Albert_(1916)"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-66e">
+ <foaf:name>66e</foaf:name>
+ <rdfs:label xml:lang="en">66e (Moreuil area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-82760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-148000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-62d"/>
+ <btmaps:touches rdf:resource="#40000-62d"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-66d"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3023822/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3007746/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2987234/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3030630/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3002713/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3031244/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3030805/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3036290/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3014847/"/>
+ <btmaps:averageElevationInMeters>87</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-70f">
+ <foaf:name>70f</foaf:name>
+ <rdfs:label xml:lang="en">70f</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-102760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-148000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-66e"/>
+ <btmaps:touches rdf:resource="#40000-66e"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-70e"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3024368/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2996722/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2992540/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2971694/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2978445/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3015767/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3018640/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3022497/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3002638/"/>
+ <btmaps:averageElevationInMeters>126</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<!-- Next row -->
+
+
+<GridSquare rdf:about="#40000-4">
+ <foaf:name>4</foaf:name>
+ <rdfs:label xml:lang="en">4 (Belgian coast (northern section))</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">97240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-116000</btmaps:easting>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-5"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2799779/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2801103/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2789786/"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-12">
+ <foaf:name>12</foaf:name>
+ <rdfs:label xml:lang="en">12 (Belgian coast (southern section))</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">77240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-116000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-4"/>
+ <btmaps:touches rdf:resource="#40000-4"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-13"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2797517/"/>
+ <btmaps:averageElevationInMeters>1</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-20">
+ <foaf:name>20</foaf:name>
+ <rdfs:label xml:lang="en">20 (Dixmude area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">57240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-116000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-12"/>
+ <btmaps:touches rdf:resource="#40000-12"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-21"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2795255/"/>
+ <btmaps:averageElevationInMeters>17</btmaps:averageElevationInMeters>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Poelcappelle"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-28">
+ <foaf:name>28</foaf:name>
+ <rdfs:label xml:lang="en">28 (Ypres area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">37240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-116000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-20"/>
+ <btmaps:touches rdf:resource="#40000-20"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-29"/>
+ <btmaps:averageElevationInMeters>33</btmaps:averageElevationInMeters>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/First_Battle_of_Ypres"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Passchendaele"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Second_Battle_of_Passchendaele"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/First_Battle_of_Passchendaele"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Broodseinde"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Messines_%281917%29"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Second_Battle_of_Ypres"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Polygon_Wood"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-36">
+ <foaf:name>36</foaf:name>
+ <rdfs:label xml:lang="en">36 (Armenti&#xE8;res-Lille area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">17240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-116000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-28"/>
+ <btmaps:touches rdf:resource="#40000-28"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-37"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3020166/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3020180/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3028709/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2985461/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3019790/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2974996/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3014049/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2997803/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3019878/"/>
+ <btmaps:averageElevationInMeters>43</btmaps:averageElevationInMeters>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Festubert"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Armenti%C3%A8res"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Fromelles"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Givenchy"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Aubers_Ridge"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-36c">
+ <foaf:name>36c</foaf:name>
+ <rdfs:label xml:lang="en">36c (La Bass&#xE9;e-Loos area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-2760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-116000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-36"/>
+ <btmaps:touches rdf:resource="#40000-36"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-44"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3022969/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2989680/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3020917/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3020000/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2992420/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3028486/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013908/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3019545/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3017556/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013525/"/>
+ <btmaps:averageElevationInMeters>25</btmaps:averageElevationInMeters>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Vimy_Ridge"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Hill_70"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_the_Hohenzollern_Redoubt"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Gas_attack_at_Hulluch"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Loos"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-51b">
+ <foaf:name>51b</foaf:name>
+ <rdfs:label xml:lang="en">51b (Arras-Cantin)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-22760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-116000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-36c"/>
+ <btmaps:touches rdf:resource="#40000-36c"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-51a"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3032107/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3014024/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3019415/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2981964/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3019472/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2984030/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013858/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967909/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3032815/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2988153/"/>
+ <btmaps:averageElevationInMeters>58</btmaps:averageElevationInMeters>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Arras_(1917)"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Hamel"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_the_Scarpe_(1918)"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Arras_(1914)"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-57c">
+ <foaf:name>57c</foaf:name>
+ <rdfs:label xml:lang="en">57c (Bapaume-Gonnelieu area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-42760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-116000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-51b"/>
+ <btmaps:touches rdf:resource="#40000-51b"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-57b"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2970168/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3033176/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3004937/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013968/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3034211/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2982100/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3035062/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3032946/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3029480/"/>
+ <btmaps:averageElevationInMeters>114</btmaps:averageElevationInMeters>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Pozi%C3%A8res"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Ginchy"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Morval"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Le_Transloy"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Guillemont"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_%C3%89pehy"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Noreuil"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Delville_Wood"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Bazentin_Ridge"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Havrincourt"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-62c">
+ <foaf:name>62c</foaf:name>
+ <rdfs:label xml:lang="en">62c (P&#xE9;ronne area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-62760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-116000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-57c"/>
+ <btmaps:touches rdf:resource="#40000-57c"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-62b"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3021277/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3029415/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2994242/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3028492/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3029609/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2987928/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3019503/"/>
+ <btmaps:averageElevationInMeters>62</btmaps:averageElevationInMeters>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_%C3%89pehy"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Mont_Saint-Quentin"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-66d">
+ <foaf:name>66d</foaf:name>
+ <rdfs:label xml:lang="en">66d (N&#xE9;sle area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-82760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-116000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-62c"/>
+ <btmaps:touches rdf:resource="#40000-62c"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-66c"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013201/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3029370/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3014763/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3030222/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2991273/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3019736/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967590/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3007665/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2982367/"/>
+ <btmaps:averageElevationInMeters>63</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-70e">
+ <foaf:name>70e</foaf:name>
+ <rdfs:label xml:lang="en">70e</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-102760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-116000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-66d"/>
+ <btmaps:touches rdf:resource="#40000-66d"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-70d"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2975145/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2988404/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2989877/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3025098/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2968893/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2970571/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2991758/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2973607/"/>
+ <btmaps:averageElevationInMeters>45</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<!-- Next rot -->
+
+<GridSquare rdf:about="#40000-5">
+ <foaf:name>5</foaf:name>
+ <rdfs:label xml:lang="en">5</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">97240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-84000</btmaps:easting>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:averageElevationInMeters>1</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-13">
+ <foaf:name>13</foaf:name>
+ <rdfs:label xml:lang="en">13</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">77240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-84000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-5"/>
+ <btmaps:touches rdf:resource="#40000-5"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-14"/>
+ <btmaps:averageElevationInMeters>8</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-21">
+ <foaf:name>21</foaf:name>
+ <rdfs:label xml:lang="en">21</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">57240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-84000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-13"/>
+ <btmaps:touches rdf:resource="#40000-13"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-22"/>
+ <btmaps:averageElevationInMeters>23</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-29">
+ <foaf:name>29</foaf:name>
+ <rdfs:label xml:lang="en">29</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">37240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-84000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-21"/>
+ <btmaps:touches rdf:resource="#40000-21"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-30"/>
+ <btmaps:averageElevationInMeters>28</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-37">
+ <foaf:name>37</foaf:name>
+ <rdfs:label xml:lang="en">37</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">17240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-84000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-29"/>
+ <btmaps:touches rdf:resource="#40000-29"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-38"/>
+ <btmaps:averageElevationInMeters>26</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-44">
+ <foaf:name>44</foaf:name>
+ <rdfs:label xml:lang="en">44</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-2760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-84000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-37"/>
+ <btmaps:touches rdf:resource="#40000-37"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-45"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3004814/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2981839/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2993852/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2972655/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013878/"/>
+ <btmaps:averageElevationInMeters>17</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-51a">
+ <foaf:name>51a</foaf:name>
+ <rdfs:label xml:lang="en">51a (Hordain area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-22760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-84000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-44"/>
+ <btmaps:touches rdf:resource="#40000-44"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-51"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2989893/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013875/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3020980/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2993406/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2972889/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3035699/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013845/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2985251/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2975771/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2982423/"/>
+ <btmaps:averageElevationInMeters>63</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-57b">
+ <foaf:name>57b</foaf:name>
+ <rdfs:label xml:lang="en">57b (Clary area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-42760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-84000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-51a"/>
+ <btmaps:touches rdf:resource="#40000-51a"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-57a"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2992421/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3033149/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3028205/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2998360/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3024740/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3028199/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3034162/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2971609/"/>
+ <btmaps:averageElevationInMeters>120</btmaps:averageElevationInMeters>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Cambrai_(1918)"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Cambrai_(1917)"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Le_Cateau"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-62b">
+ <foaf:name>62b</foaf:name>
+ <rdfs:label xml:lang="en">62b (Ramicourt area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-62760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-84000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-57b"/>
+ <btmaps:touches rdf:resource="#40000-57b"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-62a"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3022342/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3018104/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3017144/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3018515/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3019431/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3017989/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3018019/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2992422/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3019603/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2975383/"/>
+ <btmaps:averageElevationInMeters>118</btmaps:averageElevationInMeters>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_St._Quentin_(1914)"/>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_St._Quentin_%281914%29"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-66c">
+ <foaf:name>66c</foaf:name>
+ <rdfs:label xml:lang="en">66c (Berthenicourt area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-82760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-84000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-62b"/>
+ <btmaps:touches rdf:resource="#40000-62b"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-66a"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2984023/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2973673/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2974738/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3029979/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3038313/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3033192/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2994009/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2994921/"/>
+ <btmaps:averageElevationInMeters>93</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-70d">
+ <foaf:name>70d</foaf:name>
+ <rdfs:label xml:lang="en">70d (St. Gobain area)</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-102760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-84000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-66c"/>
+ <btmaps:touches rdf:resource="#40000-66c"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:isWestOf rdf:resource="#40000-70c"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2985449/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2973606/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2975002/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3018963/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2977894/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2967323/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3034660/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2979648/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3030569/"/>
+ <btmaps:averageElevationInMeters>169</btmaps:averageElevationInMeters>
+</GridSquare>
+
+
+<GridSquare rdf:about="#40000-14">
+ <foaf:name>14</foaf:name>
+ <rdfs:label xml:lang="en">14</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">77240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-52000</btmaps:easting>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2784227/"/>
+ <btmaps:averageElevationInMeters>3</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-22">
+ <foaf:name>22</foaf:name>
+ <rdfs:label xml:lang="en">22</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">57240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-52000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-14"/>
+ <btmaps:touches rdf:resource="#40000-14"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:averageElevationInMeters>4</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-30">
+ <foaf:name>30</foaf:name>
+ <rdfs:label xml:lang="en">30</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">37240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-52000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-22"/>
+ <btmaps:touches rdf:resource="#40000-22"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2786603/"/>
+ <btmaps:averageElevationInMeters>41</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-38">
+ <foaf:name>38</foaf:name>
+ <rdfs:label xml:lang="en">38</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">17240</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-52000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-30"/>
+ <btmaps:touches rdf:resource="#40000-30"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:averageElevationInMeters>53</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-45">
+ <foaf:name>45</foaf:name>
+ <rdfs:label xml:lang="en">45</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-2760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-52000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-38"/>
+ <btmaps:touches rdf:resource="#40000-38"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2788499/"/>
+ <btmaps:averageElevationInMeters>28</btmaps:averageElevationInMeters>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Battle_of_Mons"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-51">
+ <foaf:name>51</foaf:name>
+ <rdfs:label xml:lang="en">51</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-22760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-52000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-45"/>
+ <btmaps:touches rdf:resource="#40000-45"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3008426/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013915/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2969195/"/>
+ <btmaps:averageElevationInMeters>157</btmaps:averageElevationInMeters>
+ <btmaps:wasLocationOf rdf:resource="http://dbpedia.org/resource/Siege_of_Maubeuge"/>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-57a">
+ <foaf:name>57a</foaf:name>
+ <rdfs:label xml:lang="en">57a</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-42760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-52000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-51"/>
+ <btmaps:touches rdf:resource="#40000-51"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3028493/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2996080/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3031134/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2987690/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2979496/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3015137/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2973529/"/>
+ <btmaps:averageElevationInMeters>174</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-62a">
+ <foaf:name>62a</foaf:name>
+ <rdfs:label xml:lang="en">62a</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-62760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-52000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-57a"/>
+ <btmaps:touches rdf:resource="#40000-57a"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3002246/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3035907/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2974223/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3017009/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3019376/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2981861/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3019907/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3020186/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3016253/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3029606/"/>
+ <btmaps:averageElevationInMeters>164</btmaps:averageElevationInMeters>
+</GridSquare>
+ 
+<GridSquare rdf:about="#40000-66a">
+ <foaf:name>66a</foaf:name>
+ <rdfs:label xml:lang="en">66a</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-82760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-52000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-62a"/>
+ <btmaps:touches rdf:resource="#40000-62a"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3031461/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2977417/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3024953/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2973266/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2985297/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3007760/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3013064/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3029529/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2983112/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3014573/"/>
+ <btmaps:averageElevationInMeters>147</btmaps:averageElevationInMeters>
+</GridSquare>
+
+<GridSquare rdf:about="#40000-70c">
+ <foaf:name>70c</foaf:name>
+ <rdfs:label xml:lang="en">70c</rdfs:label>
+ <btmaps:scale>40000</btmaps:scale>
+ <rdfs:comment xml:lang="en">British Trench Map, 1:40,000 scale. Any series using the Revised System of Squaring.</rdfs:comment>
+ <btmaps:northing rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-102760</btmaps:northing>
+ <btmaps:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-52000</btmaps:easting>
+ <btmaps:isSouthOf rdf:resource="#40000-66a"/>
+ <btmaps:touches rdf:resource="#40000-66a"/>
+ <btmaps:eastingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">34995.6255468</btmaps:eastingLengthInYards>
+ <btmaps:northingLengthInYards rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21872.2659667</btmaps:northingLengthInYards> 
+ <rdf:type rdf:resource="http://dbpedia.org/resource/Trench_map"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2974450/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2993091/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2996032/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2980344/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2995056/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2980367/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3015616/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/2998460/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3031831/"/>
+ <btmaps:currentLocationOf rdf:resource="http://sws.geonames.org/3025078/"/>
+ <btmaps:averageElevationInMeters>78</btmaps:averageElevationInMeters>
+</GridSquare>
+
+</rdf:RDF>
