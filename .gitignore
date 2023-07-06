@@ -5,5 +5,10 @@
 *.owl
 *.nt
 *.nq
-*.json*
+*.jsonld
 *.xml
+
+# ts files
+node_modules
+out
+dist

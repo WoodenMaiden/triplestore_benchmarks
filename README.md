@@ -10,4 +10,30 @@ Tested databases are:
 
 The test are running with the [Muninn World War I](https://old.datahub.io/dataset/muninn-world-war-i) dataset.
 
+# KPIs (Key Performance Indicators)
+
+- Insertion time
+- Query time
+- Memory usage
+- Disk usage
+- CPU usage
+
+# Requirements 
+- docker
+- docker compose
+- nodejs
+
+# Tests ran 
+
+## Insertion
+
+
+## Select all the triples
+
+```sparql 
+select ?s ?p ?o where {
+    ?s ?p ?o.
+} LIMIT <limit>
+```
+
 ## Prepare the test
